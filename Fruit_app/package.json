@@ -3,11 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://keosovanreach.github.io/Fresh_Basket/ ",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "build": "vite",
+    "preview": "vite",
+    "predeploy": "npm run build",
+    "deploy": "npm run deploy"
   },
   "dependencies": {
     "aos": "^2.3.4",
