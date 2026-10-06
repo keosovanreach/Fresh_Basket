@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "dev": "npm --prefix Fruit_app run dev",
+    "build": "npm --prefix Fruit_app run build",
+    "preview": "npm --prefix Fruit_app run preview",
+    "lint": "npm --prefix Fruit_app run lint"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}
