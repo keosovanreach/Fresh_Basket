@@ -5,5 +5,5 @@ import tailwindcss from "@tailwindcss/vite";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "/Fresh_Basket/",
+  base: process.env.VERCEL ? "/" : "/Fresh_Basket/",
 });
