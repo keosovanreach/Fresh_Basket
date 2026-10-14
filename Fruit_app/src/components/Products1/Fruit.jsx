@@ -9,7 +9,7 @@ function Fruit() {
       per: "Per Kg",
       price: "2.99$",
       image:
-        "https://themewagon.github.io/fruitkha/assets/img/products/product-img-1.jpg",
+        "https://i.pinimg.com/1200x/95/7c/ae/957caea3832359c85a87825eadf450e8.jpg",
     },
     {
       id: 2,
@@ -17,7 +17,7 @@ function Fruit() {
       per: "Per Kg",
       price: "2.99$",
       image:
-        "https://themewagon.github.io/fruitkha/assets/img/products/product-img-2.jpg",
+        "https://i.pinimg.com/1200x/b5/cd/48/b5cd486fe8a4df7f71ce241bf8dfc25a.jpg",
     },
     {
       id: 3,
@@ -25,7 +25,7 @@ function Fruit() {
       per: "Per Kg",
       price: "2.99$",
       image:
-        "https://themewagon.github.io/fruitkha/assets/img/products/product-img-3.jpg",
+        "https://i.pinimg.com/736x/44/2e/88/442e88c381f9cf4f6562c480778c9b52.jpg",
     },
     {
       id: 4,
@@ -33,7 +33,7 @@ function Fruit() {
       per: "Per Kg",
       price: "2.99$",
       image:
-        "https://themewagon.github.io/fruitkha/assets/img/products/product-img-4.jpg",
+        "https://i.pinimg.com/1200x/95/7c/ae/957caea3832359c85a87825eadf450e8.jpg",
     },
     {
       id: 5,
@@ -41,7 +41,7 @@ function Fruit() {
       per: "Per Kg",
       price: "2.99$",
       image:
-        "https://themewagon.github.io/fruitkha/assets/img/products/product-img-5.jpg",
+        "https://i.pinimg.com/1200x/b5/cd/48/b5cd486fe8a4df7f71ce241bf8dfc25a.jpg",
     },
     {
       id: 6,
@@ -49,7 +49,7 @@ function Fruit() {
       per: "Per Kg",
       price: "2.99$",
       image:
-        "https://themewagon.github.io/fruitkha/assets/img/products/product-img-6.jpg",
+        "https://i.pinimg.com/736x/44/2e/88/442e88c381f9cf4f6562c480778c9b52.jpg",
     },
   ];
   return (

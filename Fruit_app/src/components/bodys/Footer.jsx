@@ -65,7 +65,7 @@ function Footer() {
                 className="px-2 py-4 rounded-l-lg bg-gray-800"
               />
               <div className="px-4 py-4 bg-gray-800 text-white rounded-r-lg font-semibold hover:bg-gray-900 hover:text-orange-400 transition duration-300 cursor-pointer ml-2">
-                <i class="fa-brands fa-telegram"></i>
+                <i className="fa-brands fa-telegram"></i>
               </div>
             </div>
           </div>
@@ -77,16 +77,16 @@ function Footer() {
           <hr className=" w-20 border-1  rounded-2xl text-orange-400" />
           <div className="grid grid-cols-4 gap-4 text-white ">
             <div className="flex items-center justify-center hover:text-orange-400 cursor-pointer transition duration-300">
-              <i class="fa-brands fa-facebook"></i>
+              <i className="fa-brands fa-facebook"></i>
             </div>
             <div className="flex items-center justify-center hover:text-orange-400 cursor-pointer transition duration-300">
-              <i class="fa-brands fa-twitter"></i>
+              <i className="fa-brands fa-twitter"></i>
             </div>
             <div className="flex items-center justify-center hover:text-orange-400 cursor-pointer transition duration-300">
-              <i class="fa-brands fa-instagram"></i>
+              <i className="fa-brands fa-instagram"></i>
             </div>
             <div className="flex items-center justify-center hover:text-orange-400 cursor-pointer transition duration-300">
-              <i class="fa-brands fa-linkedin"></i>
+              <i className="fa-brands fa-linkedin"></i>
             </div>
           </div>
         </div>

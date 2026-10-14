@@ -54,9 +54,9 @@ function OurTeam() {
               />
             </div>
             <div className="absolute bottom-0 left-0 w-full text-white p-4 items-center justify-center flex gap-10">
-              <i class="fa-brands fa-facebook text-2xl hover:text-orange-400 cursor-pointer"></i>
-              <i class="fa-brands fa-twitter text-2xl hover:text-orange-400 cursor-pointer"></i>
-              <i class="fa-brands fa-instagram text-2xl hover:text-orange-400 cursor-pointer"></i>
+              <i className="fa-brands fa-facebook text-2xl hover:text-orange-400 cursor-pointer"></i>
+              <i className="fa-brands fa-twitter text-2xl hover:text-orange-400 cursor-pointer"></i>
+              <i className="fa-brands fa-instagram text-2xl hover:text-orange-400 cursor-pointer"></i>
             </div>
             <div className="absolute bottom-10 left-0 w-full text-white p-4 items-center justify-center flex flex-col">
               <h1 className="text-2xl font-bold">{member.name}</h1>
