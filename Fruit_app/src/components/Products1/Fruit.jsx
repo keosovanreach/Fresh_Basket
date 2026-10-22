@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import { addToCart } from "../../utils/cart";
 
 function Fruit() {
   const fruits = [
@@ -85,9 +85,7 @@ function Fruit() {
             </div>
             <div className="flex justify-center items-center pt-10">
               <button
-                onClick={() => {
-                  window.dispatchEvent(new Event("cartUpdated"));
-                }}
+                onClick={() => addToCart(product)}
                 className="px-4 py-2 bg-orange-400 text-white rounded-full font-semibold hover:bg-gray-900 hover:text-orange-400 transition duration-300 cursor-pointer flex items-center gap-2"
               >
                 <i className="fa-solid fa-cart-shopping"></i>

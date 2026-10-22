@@ -1,87 +1,180 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  getCartItems,
+  getCartProductKey,
+  removeFromCart,
+  updateCartQuantity,
+} from "../../utils/cart";
 
 function ProCart() {
+  const [items, setItems] = useState(getCartItems);
+
+  useEffect(() => {
+    const refreshCart = () => setItems(getCartItems());
+
+    window.addEventListener("cartUpdated", refreshCart);
+    window.addEventListener("storage", refreshCart);
+
+    return () => {
+      window.removeEventListener("cartUpdated", refreshCart);
+      window.removeEventListener("storage", refreshCart);
+    };
+  }, []);
+
+  const subtotal = items.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0,
+  );
+
+  const changeQuantity = (item, quantity) => {
+    updateCartQuantity(item, quantity);
+    setItems(getCartItems());
+  };
+
+  const removeItem = (item) => {
+    removeFromCart(item);
+    setItems(getCartItems());
+  };
+
+  if (items.length === 0) {
+    return (
+      <section className="bg-white w-full px-4 py-16 text-center">
+        <h2 className="text-2xl font-bold text-gray-900">Your cart is empty</h2>
+        <p className="mt-2 text-gray-600">
+          Add some fresh products to get started.
+        </p>
+        <Link
+          to="/shop"
+          className="inline-block mt-6 rounded-full bg-orange-400 px-5 py-3 font-semibold text-white hover:bg-gray-900"
+        >
+          Browse Products
+        </Link>
+      </section>
+    );
+  }
+
   return (
-    <div className="bg-white w-full py-7 grid grid-cols-1 mt-5 px-4 sm:px-6 md:px-12 gap-4 sm:grid-cols-1 md:grid-cols-2">
     
-      <div className="w-full sm:w-full md:w-full overflow-x-auto">
-        <div className="min-w-[700px] md:min-w-0 md:w-full shadow">
-          <div className="grid grid-cols-5 gap-4 bg-amber-400 px-4 py-4 rounded-t-lg font-bold text-gray-900">
-            <p>Product Image</p>
-            <p>Name</p>
-            <p>Price</p>
-            <p>Quantity</p>
-            <p>Total</p>
-          </div>
-
-          <div className="grid grid-cols-5 gap-4 items-center px-4 py-4 border-b border-gray-200">
-            <div>
-              <img
-                src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=200"
-                alt="MacBook Pro"
-                className="w-20 h-20 object-contain rounded"
-              />
+  
+    <section className="bg-white w-full py-7 px-4 sm:px-6 md:px-12 mt-5">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+    
+        {/* Cart Products */}
+        <div className="w-full min-w-0 overflow-x-auto">
+          <div className="min-w-[700px] md:min-w-0 md:w-full shadow-md rounded-lg overflow-hidden">
+    
+            <div className="grid grid-cols-5 gap-4 bg-amber-400 px-4 py-4 rounded-t-lg font-bold text-gray-900">
+              <p>Product Image</p>
+              <p>Name</p>
+              <p>Price</p>
+              <p>Quantity</p>
+              <p>Total</p>
             </div>
-
-            <p className="font-semibold">MacBook Pro</p>
-
-            <p className="text-gray-700">$999</p>
-
-            <div className="flex items-center gap-3">
-              <button className="px-3 py-1 bg-gray-200 rounded">-</button>
-              <span>1</span>
-              <button className="px-3 py-1 bg-amber-400 rounded">+</button>
-            </div>
-
-            <p className="font-semibold">$999</p>
+    
+            {items.map((item) => (
+              <div
+                key={getCartProductKey(item)}
+                className="grid grid-cols-5 gap-4 items-center px-4 py-4 border-b border-gray-200 transition hover:bg-gray-50"
+              >
+                <div>
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-20 h-20 object-contain rounded"
+                  />
+                </div>
+    
+                <p className="font-semibold text-gray-800">
+                  {item.name}
+                </p>
+    
+                <p className="text-gray-700">
+                  ${item.price.toFixed(2)}
+                </p>
+    
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      changeQuantity(item, item.quantity - 1)
+                    }
+                    className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 transition"
+                  >
+                    -
+                  </button>
+    
+                  <span className="font-medium">
+                    {item.quantity}
+                  </span>
+    
+                  <button
+                    type="button"
+                    onClick={() =>
+                      changeQuantity(item, item.quantity + 1)
+                    }
+                    className="px-3 py-1 bg-amber-400 rounded hover:bg-amber-500 transition"
+                  >
+                    +
+                  </button>
+                </div>
+    
+                <div className="flex items-center gap-2">
+                  <p className="font-semibold text-gray-900">
+                    ${(item.price * item.quantity).toFixed(2)}
+                  </p>
+    
+                  <button
+                    type="button"
+                    onClick={() => removeItem(item)}
+                    aria-label={`Remove ${item.name} from cart`}
+                    className="text-gray-400 hover:text-red-500 transition"
+                  >
+                    <i className="fa-solid fa-trash" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+            ))}
+    
           </div>
         </div>
+    
+        {/* Cart Summary */}
+        <div className="w-full min-w-0 h-fit shadow-md rounded-lg overflow-hidden">
+          <div className="grid grid-cols-2 gap-4 bg-amber-400 px-4 py-4 rounded-t-lg font-bold text-gray-900">
+            <p>Cart Summary</p>
+            <p className="text-right">Price</p>
+          </div>
+    
+          <div className="grid grid-cols-2 gap-x-4 gap-y-5 px-4 py-5 border-b border-gray-200">
+            <p className="font-semibold text-gray-700">Subtotal</p>
+            <p className="text-right text-gray-700">
+              ${subtotal.toFixed(2)}
+            </p>
+    
+            <p className="font-semibold text-gray-700">Shipping</p>
+            <p className="text-right text-green-600">Free</p>
+    
+            <p className="font-bold text-lg text-gray-900">Total</p>
+            <p className="text-right font-bold text-lg text-orange-500">
+              ${subtotal.toFixed(2)}
+            </p>
+          </div>
+    
+          <div className="p-4">
+            <Link
+              to="/checkout"
+              className="block w-full rounded-full bg-amber-400 px-4 py-3 text-center font-bold text-white transition duration-300 hover:bg-gray-900 hover:text-amber-400"
+            >
+              Proceed to Checkout
+              <i className="fa-solid fa-arrow-right ml-2"></i>
+            </Link>
+          </div>
+        </div>
+    
       </div>
-     
-      <div className="min-w-full">
-        <div className="grid grid-cols-2 gap-4 bg-amber-400 px-4 py-4 rounded-t-lg font-bold text-gray-900">
-          <p>Total</p>
-          <p>Price</p>
-        </div>
-
-        <div className="grid grid-cols-2 gap-4 items-center px-4 py-4 border-b border-gray-200">
-          <p className="font-semibold">Subtotal</p>
-          <p className="text-gray-700">$999</p>
-
-          <p className="font-semibold">Shipping</p>
-          <p className="text-gray-700">$9</p>
-
-          <p className="font-semibold">Total</p>
-          <p className="text-gray-700">$999</p>
-        </div>
-
-        <div className="px-4 py-4 flex gap-4">
-          <button className="px-3 py-2 bg-amber-400 rounded text-white font-bold w-full mt-4">
-            Update Cart
-          </button>
-
-          <button className="px-3 py-2 bg-amber-400 rounded text-white font-bold w-full mt-4">
-            Checkout
-          </button>
-        </div>
-
-        <div className="px-4 py-4">
-          <h1 className="font-bold">Apply Coupon</h1>
-
-          <input
-            type="text"
-            className="px-3 py-2 border-2 border-amber-400 rounded-l-lg mt-4 w-fill"
-            placeholder="Coupon Code"
-          />
-
-          <input
-            className="px-3 py-2 border-2 border-amber-400 mt-4 w-fill rounded-r-2xl bg-amber-400 text-white cursor-pointer hover:bg-gray-900 hover:text-amber-400 transition duration-300  "
-            type="submit"
-            value="Apply"
-          />
-        </div>
-      </div>
-    </div>
+    </section>
+  
   );
 }
 

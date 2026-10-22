@@ -1,4 +1,5 @@
 import React from "react";
+import { addToCart } from "../../utils/cart";
 
 function Products() {
   const products = [
@@ -60,9 +61,7 @@ function Products() {
             </div>
             <div className="flex justify-center items-center pt-10">
               <button
-              onClick={() => {
-                window.dispatchEvent(new Event("cartUpdated"));
-              }}
+                onClick={() => addToCart(products)}
                 className="px-4 py-2 bg-orange-400 text-white rounded-full font-semibold hover:bg-gray-900 hover:text-orange-400 transition duration-300 cursor-pointer flex items-center gap-2
             "
               >

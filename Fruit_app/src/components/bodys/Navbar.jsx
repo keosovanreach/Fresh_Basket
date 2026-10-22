@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import logo from "../../assets/images/LogoFr-removebg-preview.png";
 import { Link } from "react-router-dom";
+import { getCartItems } from "../../utils/cart";
 
 function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -8,13 +9,18 @@ function Navbar() {
 
   useEffect(() => {
     const updateCart = () => {
-      setCartQty((qty) => qty + 1);
+      setCartQty(
+        getCartItems().reduce((quantity, item) => quantity + item.quantity, 0),
+      );
     };
 
+    updateCart();
     window.addEventListener("cartUpdated", updateCart);
+    window.addEventListener("storage", updateCart);
 
     return () => {
       window.removeEventListener("cartUpdated", updateCart);
+      window.removeEventListener("storage", updateCart);
     };
   }, []);
   return (
@@ -232,10 +238,9 @@ function Navbar() {
             </div>
             <div className="border-t border-green-500 pt-4">
               <div className="relative">
-                <i
-                  className="fa-solid fa-cart-shopping text-white text-xl hover:text-orange-400 cursor-pointer"
-                  onClick={() => {}}
-                ></i>
+                <Link to="/cart" onClick={() => setIsOpen(false)}>
+                  <i className="fa-solid fa-cart-shopping text-white text-xl hover:text-orange-400 cursor-pointer"></i>
+                </Link>
 
                 {cartQty > 0 && (
                   <span className="absolute -top-3 -right-3 bg-orange-400 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
