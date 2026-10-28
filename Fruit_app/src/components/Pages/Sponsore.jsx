@@ -31,7 +31,7 @@ function Sponsors() {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 w-full">
       
-        {/* Horizontal scroll on mobile */}{" "}
+      
         <div className="overflow-x-auto">
        
           <div className="grid grid-cols-4 gap-4 min-w-[600px]">

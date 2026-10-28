@@ -133,10 +133,10 @@ function Navbar() {
               </span>
             )}
           </div>
-          <i className="fa-solid fa-magnifying-glass text-white text-xl hover:text-orange-400 cursor-pointer"></i>
+          {/* <i className="fa-solid fa-magnifying-glass text-white text-xl hover:text-orange-400 cursor-pointer"></i> */}
         </div>
         <div className="flex md:hidden items-center gap-5">
-          <i className="fa-solid fa-magnifying-glass text-white text-xl hover:text-orange-400 cursor-pointer"></i>
+          {/* <i className="fa-solid fa-magnifying-glass text-white text-xl hover:text-orange-400 cursor-pointer"></i> */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="text-white text-2xl focus:outline-none cursor-pointer"
